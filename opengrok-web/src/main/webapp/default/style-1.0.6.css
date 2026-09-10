@@ -623,7 +623,7 @@ html.diff #whole_header {
     display: inline-block;
 }
 
-#history::before, #bar .annotate::before, #line::before, #defbox::before, #download::before, #raw::before, #scopes::before {
+#history::before, #bar .annotate::before, #line::before, #defbox::before, #download::before, #raw::before, #scopes::before, #gitiles-link::before {
     content: "|";
     padding: 0.5ex;
     color: var(--og-fg);

@@ -767,6 +767,16 @@ public class PageConfig {
     }
 
     /**
+     * Build a Gitiles URL for the currently displayed file.
+     *
+     * @return gitiles URL or {@code null} if not available
+     */
+    @Nullable
+    public String getGitilesUrl() {
+        return GitilesUrls.getUrl(getPath(), getResourceFile(), getProject());
+    }
+
+    /**
      * Get the annotation for the requested resource.
      *
      * @return {@code null} if not available or annotation was not requested,

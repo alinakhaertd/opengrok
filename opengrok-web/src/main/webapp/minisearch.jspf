@@ -20,7 +20,10 @@ Copyright (c) 2007, 2025, Oracle and/or its affiliates. All rights reserved.
 Portions Copyright (c) 2020, Chris Fraire <cfraire@me.com>.
 --%>
 <%@ page session="false" errorPage="error.jsp" import="
+java.net.URI,
+org.opengrok.indexer.configuration.RuntimeEnvironment,
 org.opengrok.indexer.configuration.Project,
+org.opengrok.indexer.history.RepositoryInfo,
 org.opengrok.web.PageConfig,
 org.opengrok.indexer.web.Prefix,
 org.opengrok.indexer.web.QueryParameters,
@@ -92,9 +95,14 @@ org.opengrok.indexer.web.Util"%><%
             (cfg.getRequestedRevision().isEmpty() ? "" : "?" +
             QueryParameters.REVISION_PARAM_EQ + Util.uriEncode(cfg.getRequestedRevision()))
             %>"><span id="download"></span>Download</a></li>
-	<%
+    <% } %>
+    <%
+    String gitilesUrl = cfg.getGitilesUrl();
+    if (gitilesUrl != null && !gitilesUrl.isEmpty()) {
+    %><li><a id="gitiles-link" data-gitiles-url="<%= Util.htmlize(gitilesUrl) %>"
+    href="<%= Util.htmlize(gitilesUrl) %>">Open in Gitiles</a></li><%
     }
-        %><li><input type="text" id="search" name="<%= QueryParameters.FULL_SEARCH_PARAM %>"
+    %><li><input type="text" id="search" name="<%= QueryParameters.FULL_SEARCH_PARAM %>"
                   class="q" aria-label="Search"/></li>
             <li><input type="submit" value="Search" class="submit" /></li><%
     Project proj = cfg.getProject();

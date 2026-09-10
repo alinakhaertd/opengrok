@@ -1681,6 +1681,18 @@ function domReadyMast() {
         }
     }
 
+    const updateGitilesLink = function () {
+        const link = document.getElementById("gitiles-link");
+        if (!link) {
+            return;
+        }
+
+        const line = window.location.hash.match(/^#(\d+)$/);
+        link.href = link.dataset.gitilesUrl + (line ? "#" + line[1] : "");
+    };
+    updateGitilesLink();
+    window.addEventListener("hashchange", updateGitilesLink);
+
     $('a.title-tooltip').tooltip({
         content: function () {
             const element = $(this);
